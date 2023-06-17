@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class SpawnGarbages : MonoBehaviour
 {
+    [SerializeField] private GameObject _containerGarbages;
     [SerializeField] private Garbage[] _garbageTemplate;
     [SerializeField] private Transform _minRandomX;
     [SerializeField] private Transform _maxRandomX;
@@ -15,6 +15,7 @@ public class SpawnGarbages : MonoBehaviour
 
     [SerializeField] private int _leftoverTrash;
 
+    public UnityAction ChangedAward;
     private List<Garbage> _garbages = new List<Garbage>();
 
     private WaitForSeconds _delay;
@@ -31,6 +32,8 @@ public class SpawnGarbages : MonoBehaviour
         StartCoroutine(Spawn(0.7f, -1));
         StartCoroutine(Spawn(1f, 0));
     }
+
+    public int GetLeftoverTrash() => _leftoverTrash;
 
     private void DestroyGarbage(Garbage garbage)
     {
@@ -50,6 +53,7 @@ public class SpawnGarbages : MonoBehaviour
                 garbage.LayerUp();
 
             StartCoroutine(Spawn(0.1f, -3));
+            ChangedAward?.Invoke();
         }
     }
 
@@ -68,7 +72,7 @@ public class SpawnGarbages : MonoBehaviour
 
             randomGarbage.SetLayer(alfa, orderlayer);
 
-            Garbage garbage = Instantiate(randomGarbage, new Vector2(randonPositionX, randomPositionY), randomQuaternion);
+            Garbage garbage = Instantiate(randomGarbage, new Vector2(randonPositionX, randomPositionY), randomQuaternion, _containerGarbages.transform);
 
             garbage.GarbageCountChanged += DestroyGarbage;
 

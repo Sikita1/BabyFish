@@ -6,26 +6,26 @@ public class CanvasGameOver : MonoBehaviour
     [SerializeField] private GameWinScreen _gameWinScreen;
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private SliderTimeLevel _slider;
+    [SerializeField] private LevelFinisher _finisher;
     [SerializeField] private EnemyMover _enemyMover;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private Player _player;
 
-
-    void Start()
+    private void Start()
     {
-        _gameWinScreen.gameObject.SetActive(false);
         _gameOverScreen.gameObject.SetActive(false);
+        _gameWinScreen.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        _slider.EndLevel += OnWin;
+        _finisher.Finished += OnWin;
         _player.Died += OnLoss;
     }
 
     private void OnDisable()
     {
-        _slider.EndLevel -= OnWin;
+        _finisher.Finished -= OnWin;
         _player.Died -= OnLoss;
     }
 

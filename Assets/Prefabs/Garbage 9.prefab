@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 4594654806388314469}
+  _explotion: {fileID: -3250815639329822878, guid: f067cca3f011c2549b80462f72c96b9e, type: 3}
 --- !u!58 &7159266537870176269
 CircleCollider2D:
   m_ObjectHideFlags: 0

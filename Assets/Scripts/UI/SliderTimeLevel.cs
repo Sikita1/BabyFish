@@ -1,59 +1,45 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SliderTimeLevel : MonoBehaviour
 {
+    [SerializeField] private LevelFinisher _finisher;
     [SerializeField] private Slider _slider;
     [SerializeField] private Player _player;
-    //[SerializeField] private int _fullPath;
-
-    public event UnityAction EndLevel;
+    [SerializeField] private float _step;
 
     private Coroutine _coroutine;
-    private float _delay = 0.002f;
 
-    //private void Start()
-    //{
-    //    _slider.maxValue = _fullPath;
-    //}
+    private void Start()
+    {
+        _slider.maxValue = _finisher.MaxBonusValue;
+    }
 
     private void OnEnable()
     {
-        _player.GoToWay += OnRaiseCrystal;
+        _player.BonusTaken += OnRaiseBonus;
     }
 
     private void OnDisable()
     {
-        _player.GoToWay -= OnRaiseCrystal;
+        _player.BonusTaken -= OnRaiseBonus;
     }
 
-    private void OnRaiseCrystal(int stretch)
+    private void OnRaiseBonus(int stretch)
     {
         if (_coroutine != null)
             StopCoroutine(SlideDisplay(stretch));
 
         _coroutine = StartCoroutine(SlideDisplay(stretch));
-
-        if (_slider.value == _slider.maxValue)
-            EndGame();
     }
 
-    public void EndGame()
+    private IEnumerator SlideDisplay(int target)
     {
-        EndLevel?.Invoke();
-    }
-
-    private IEnumerator SlideDisplay(int stretch)
-    {
-        WaitForSeconds wait = new WaitForSeconds(_delay);
-
-        while (_slider.value != stretch)
+        while (_slider.value != target)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, stretch, 1f);
-            yield return wait;
+            _slider.value = Mathf.MoveTowards(_slider.value, target, _step * Time.deltaTime);
+            yield return null;
         }
     }
 }

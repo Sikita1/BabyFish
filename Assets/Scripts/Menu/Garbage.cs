@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -9,11 +6,13 @@ using UnityEngine.EventSystems;
 public class Garbage : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] private DestroyExplotion _explotion;
 
     public event UnityAction<Garbage> GarbageCountChanged;
 
     private void Start()
     {
+        //Application.targetFrameRate = 60;
         _sprite = GetComponent<SpriteRenderer>();
     }
 
@@ -22,6 +21,7 @@ public class Garbage : MonoBehaviour, IPointerClickHandler
         if (Mathf.Abs(_sprite.color.a - 1f) < float.Epsilon)
         {
             GarbageCountChanged?.Invoke(this);
+            Instantiate(_explotion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

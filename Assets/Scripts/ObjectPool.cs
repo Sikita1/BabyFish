@@ -10,17 +10,6 @@ public class ObjectPool : MonoBehaviour
 
     private List<GameObject> _poolEnemy = new List<GameObject>();
 
-    //protected void Initialize(GameObject prefab)
-    //{
-    //    for (int i = 0; i < _capacity; i++)
-    //    {
-    //        GameObject spawned = Instantiate(prefab, _container.transform);
-    //        spawned.SetActive(false);
-
-    //        _pool.Add(spawned);
-    //    }
-    //}
-
     protected void Initialize(GameObject[] prefabs)
     {
         for (int i = 0; i < _capacityEnemy; i++)

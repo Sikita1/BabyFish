@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _health;
 
     public event UnityAction<int> HealthChanged;
-    public event UnityAction<int> GoToWay;
+    public event UnityAction<int> BonusTaken;
     public event UnityAction Died;
 
     private Animator _animator;
@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         HealthChanged?.Invoke(_health);
-        GoToWay?.Invoke(_stretchTrack);
+        BonusTaken?.Invoke(_stretchTrack);
 
         _animator = GetComponent<Animator>();
     }
@@ -32,10 +32,10 @@ public class Player : MonoBehaviour
             Die();
     }
 
-    public void RaiseCrystal(int stretch)
+    public void RaiseBonus(int stretch)
     {
         _stretchTrack += stretch;
-        GoToWay?.Invoke(_stretchTrack);
+        BonusTaken?.Invoke(_stretchTrack);
 
         //_animator.SetTrigger("");
     }
