@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     public void SpeedNormal()
     {
-        _animator.speed = 1;
+        _animator.speed = 2;
     }
 
     public void Die()
