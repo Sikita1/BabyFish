@@ -6,6 +6,7 @@ public class PanelColor : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private float _delay;
+    [SerializeField] private float _maxAlfa;
 
     private Coroutine _coroutine;
 
@@ -16,13 +17,13 @@ public class PanelColor : MonoBehaviour
 
     public void StartOn()
     {
-        _coroutine = StartCoroutine(Blackout(0f, 100f));
+        _coroutine = StartCoroutine(Blackout(0f, _maxAlfa));
     }
 
     public void StartOff()
     {
         StopCoroutine(_coroutine);
-        _coroutine = StartCoroutine(Blackout(100f, 0f));
+        _coroutine = StartCoroutine(Blackout(_maxAlfa, 0f));
     }
 
     private IEnumerator Blackout(float current, float target)

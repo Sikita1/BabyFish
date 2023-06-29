@@ -6,6 +6,8 @@ public class Spawner : ObjectPool
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private float _secondsBetweenSpawn;
 
+    [SerializeField] private PearlAnimation _coinAnimation;
+
     private bool _inGame;
     private float _elepsedTime;
 
@@ -39,6 +41,8 @@ public class Spawner : ObjectPool
     {
         enemy.SetActive(true);
         enemy.transform.position = spawnPoint;
-        //enemy.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+
+        if(enemy.TryGetComponent(out Pearl pearl))
+            pearl.SetAnimation(_coinAnimation);
     }
 }

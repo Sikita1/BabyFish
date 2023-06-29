@@ -38,7 +38,7 @@ public class SliderTimeLevel : MonoBehaviour
     {
         while (_slider.value != target)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, target, _step * Time.deltaTime);
+            _slider.value = Mathf.MoveTowards(_slider.value, target,0.01f /*_step * Time.deltaTime*/);
             yield return null;
         }
     }
