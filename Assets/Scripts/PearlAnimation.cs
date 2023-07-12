@@ -1,14 +1,17 @@
-using UnityEngine;
 using DG.Tweening;
-using System;
+using UnityEngine;
 
 public class PearlAnimation : MonoBehaviour
 {
     [SerializeField] private Transform _target;
 
+    private float duraction = 2f;
+
     public void Anim(Transform transform, TweenCallback callBack)
     {
-        transform.DOMove(_target.position, 2).OnComplete(callBack);
-        //transform.DOScale
+        transform
+            .DOMove(_target.position, duraction)
+            .SetUpdate(true)
+            .OnComplete(callBack);
     }
 }

@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelChanged : MonoBehaviour
 {
-    [SerializeField] private int _levelToLoad;
-
     private Animator _animator;
+
+    private const string _saveKey = "saveScene";
 
     private void Start()
     {
@@ -20,6 +20,19 @@ public class LevelChanged : MonoBehaviour
     public void OnFadeComplete()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(_levelToLoad);
+
+        SceneManager.LoadScene(Scene());
+    }
+
+    public void OpenMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+
+    private int Scene()
+    {
+        var data = SaveManager.Load<SaveData.SceneController>(_saveKey);
+        return data.CurrentScene;
     }
 }
