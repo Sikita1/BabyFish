@@ -15,6 +15,13 @@ public class Score : MonoBehaviour
         ScoreChanged?.Invoke(_value);
     }
 
+    public void ResetInvoice()
+    {
+        _value = 0;
+        ScoreChanged?.Invoke(_value);
+        Save();
+    }
+
     public int GetScore() => _value;
 
     public void ScoreUp(int value)

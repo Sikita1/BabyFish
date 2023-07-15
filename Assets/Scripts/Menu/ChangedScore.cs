@@ -57,5 +57,5 @@ public class ChangedScore : MonoBehaviour
         _animator.SetBool("isShow", false);
     }
 
-    private int GetNumberSprite() => _score.GetScore() / _spawn.GetLeftoverTrash();
+    private int GetNumberSprite() => _score.GetScore() / _spawn.GetNumberPoints();
 }

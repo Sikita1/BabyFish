@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2464847404576895976}
   - component: {fileID: -254064777233917500}
   - component: {fileID: 2661095182344026090}
+  - component: {fileID: 7875025583381408636}
   m_Layer: 0
   m_Name: Garbage 15
   m_TagString: Untagged
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1688300912, guid: 8a61525017b3c394caf5a913427fb101, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -126,3 +127,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 2464847404576895976}
   _explotion: {fileID: -3250815639329822878, guid: f067cca3f011c2549b80462f72c96b9e, type: 3}
+--- !u!114 &7875025583381408636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9076309791712440931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c28d7f4a073c24aa3f093f697d5ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

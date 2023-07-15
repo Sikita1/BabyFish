@@ -22,6 +22,7 @@ public class SpawnGarbages : MonoBehaviour
 
     private float _interval = 0.4f;
     private int _fullTurn = 360;
+    private int _numberPoints = 30;
 
     public int CollectedCount { get; private set; }
 
@@ -33,7 +34,7 @@ public class SpawnGarbages : MonoBehaviour
         StartCoroutine(Spawn(1f, 0));
     }
 
-    public int GetLeftoverTrash() => _leftoverTrash;
+    public int GetNumberPoints() => _numberPoints;
 
     private void DestroyGarbage(Garbage garbage)
     {
@@ -53,8 +54,15 @@ public class SpawnGarbages : MonoBehaviour
                 garbage.LayerUp();
 
             StartCoroutine(Spawn(0.1f, -3));
-            ChangedAward?.Invoke();
         }
+
+        ShiftAward();
+    }
+
+    private void ShiftAward()
+    {
+        if (CollectedCount % _numberPoints == 0)
+            ChangedAward?.Invoke();
     }
 
     private IEnumerator Spawn(float alfa, int orderlayer)
@@ -81,8 +89,6 @@ public class SpawnGarbages : MonoBehaviour
             yield return _delay;
         }
     }
-
-    private int GetRandonNumber() => Random.Range(7, 13);
 
     private Garbage GetRandomGarbage()
     {

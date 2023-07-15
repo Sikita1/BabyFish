@@ -5461,7 +5461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: c0691f977c354374cb9027520f982711, type: 3}
+  m_Texture: {fileID: 2800000, guid: aec5d9bc4bcd21a44b2014cb3551b5cc, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -16433,7 +16433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &560421229
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16772,7 +16772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1736128695}
-  _maxBonusValue: 1
+  _maxBonusValue: 3
 --- !u!82 &584793695
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22857,7 +22857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1122346978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29290,7 +29290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0086a3c56fe27b740bc7b7980000251b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 5
+  _health: 3
 --- !u!50 &1736128696
 Rigidbody2D:
   serializedVersion: 4
@@ -29501,7 +29501,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
