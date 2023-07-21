@@ -36,7 +36,7 @@ public class Heart : MonoBehaviour
         {
             nextValue = Mathf.Lerp(startValue, endValue, elapsed / duration);
             _heart.fillAmount = nextValue;
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
 

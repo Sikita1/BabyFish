@@ -10,7 +10,7 @@ public class AnimStars : MonoBehaviour
             star.SetActive(false);
     }
 
-    private void OnStarLeft()
+    public void OnStarLeft()
     {
         _stars[0].SetActive(true);
     }

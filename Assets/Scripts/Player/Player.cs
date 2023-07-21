@@ -14,11 +14,8 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private int _stretchTrack = 0;
 
-    private const string _saveKey = "saveScene";
-
     private void Start()
     {
-        Save();
         HealthChanged?.Invoke(_health);
         BonusTaken?.Invoke(_stretchTrack);
 
@@ -55,20 +52,5 @@ public class Player : MonoBehaviour
     public void Die()
     {
         Died?.Invoke();
-    }
-
-    private void Save()
-    {
-        SaveManager.Save(_saveKey, GetSaveScene());
-    }
-
-    private SaveData.SceneController GetSaveScene()
-    {
-        var data = new SaveData.SceneController()
-        {
-            CurrentScene = SceneManager.GetActiveScene().buildIndex,
-        };
-
-        return data;
     }
 }

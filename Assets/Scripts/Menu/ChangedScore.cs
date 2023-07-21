@@ -12,6 +12,11 @@ public class ChangedScore : MonoBehaviour
     [SerializeField] private float _lerpDuraction;
     [SerializeField] private int _countNewBonus;
 
+    private void Start()
+    {
+        OnStartChangingIcon();
+    }
+
     private void OnEnable()
     {
         _spawn.ChangedAward += ChangeSprite;
@@ -53,9 +58,9 @@ public class ChangedScore : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
+         
         _animator.SetBool("isShow", false);
     }
 
-    private int GetNumberSprite() => _score.GetScore() / _spawn.GetNumberPoints();
+    public int GetNumberSprite() => _score.GetScore() / _spawn.GetNumberPoints();
 }

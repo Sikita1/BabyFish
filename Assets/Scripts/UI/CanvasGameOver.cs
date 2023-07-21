@@ -44,10 +44,6 @@ public class CanvasGameOver : MonoBehaviour
         _gameWinScreen.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
         Time.timeScale = 0f;
-        //_slider.enabled = false;
-        //_playerMover.StopPlayer();
-        //_enemyMover.StopEnemy();
-        //_spawner.StopSpawner();
     }
 
     private void OnLoss()
@@ -55,9 +51,5 @@ public class CanvasGameOver : MonoBehaviour
         _gameOverScreen.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
         Time.timeScale = 0f;
-        //_slider.enabled = false;
-        //_playerMover.StopPlayer();
-        //_enemyMover.StopEnemy();
-        //_spawner.StopSpawner();
     }
 }

@@ -1,23 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameWinScreen : MonoBehaviour
 {
-    [SerializeField] private Button _nextLevelButton;
-
-    private void OnEnable()
+    // Start is called before the first frame update
+    void Start()
     {
-        _nextLevelButton.onClick.AddListener(NextLevelButtonClick);
+        
     }
 
-    private void OnDisable()
+    // Update is called once per frame
+    void Update()
     {
-        _nextLevelButton.onClick.RemoveListener(NextLevelButtonClick);
-    }
-
-    private void NextLevelButtonClick()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 }

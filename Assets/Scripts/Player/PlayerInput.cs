@@ -5,12 +5,30 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerMover _mover;
 
-    void Start()
+    private void Start()
     {
         _mover = GetComponent<PlayerMover>();
     }
 
-    void Update()
+    private void OnEnable()
+    {
+        MovePlayerDisplayControl.SwipeEvent += OnSwipe;
+    }
+
+    private void OnDisable()
+    {
+        MovePlayerDisplayControl.SwipeEvent -= OnSwipe;
+    }
+
+    private void OnSwipe(bool vectorUp)
+    {
+        if (vectorUp)
+            _mover.TryMoveUp();
+        else if (!vectorUp)
+            _mover.TryMoveDown();
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
             _mover.TryMoveUp();

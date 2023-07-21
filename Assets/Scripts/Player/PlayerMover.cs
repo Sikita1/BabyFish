@@ -32,10 +32,13 @@ public class PlayerMover : MonoBehaviour
         Vector3 _direction = _targetPosition - transform.position;
 
         if (transform.position != _targetPosition)
-            transform.position = Vector2.MoveTowards(transform.position, _targetPosition, _moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position,
+                                                    _targetPosition,
+                                                    _moveSpeed * Time.deltaTime);
 
         Rotate(_direction);
     }
+
     public void StopPlayer() => _isMove = false;
 
     public void TryMoveUp()

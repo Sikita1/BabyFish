@@ -22,8 +22,17 @@ public class PanelColor : MonoBehaviour
 
     public void StartOff()
     {
+        //if (_coroutine != null)
         StopCoroutine(_coroutine);
         _coroutine = StartCoroutine(Blackout(_maxAlfa, 0f));
+        StartCoroutine(DelayClosePanel());
+    }
+
+    private IEnumerator DelayClosePanel()
+    {
+        yield return new WaitForSecondsRealtime(_delay);
+
+        gameObject.SetActive(false);
     }
 
     private IEnumerator Blackout(float current, float target)
@@ -34,7 +43,7 @@ public class PanelColor : MonoBehaviour
 
         while (color.a != target)
         {
-            color.a = Mathf.MoveTowards(color.a, (1f / 255f * target), Time.deltaTime / _delay);
+            color.a = Mathf.MoveTowards(color.a, (1f / 255f * target), Time.unscaledDeltaTime / _delay);
             _image.color = color;
             yield return null;
         }

@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ProgressButton : MonoBehaviour
 {
     [SerializeField] private ProgressInfo _panel;
     [SerializeField] private PanelColor _panelColor;
+
+    public event UnityAction PanelOpening;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class ProgressButton : MonoBehaviour
 
     public void OnButtonClick()
     {
+        PanelOpening?.Invoke();
         _panel.gameObject.SetActive(true);
         gameObject.SetActive(false);
         _panelColor.StartOn();
