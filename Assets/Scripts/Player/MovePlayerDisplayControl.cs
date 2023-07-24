@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MovePlayerDisplayControl : MonoBehaviour
@@ -65,10 +66,12 @@ public class MovePlayerDisplayControl : MonoBehaviour
         }
 
         if (_swipeDelta.magnitude > _deadZone)
+        {
             if (SwipeEvent != null)
                 SwipeEvent(_swipeDelta.y > 0 ? true : false);
 
-        ResetSwipe();
+                ResetSwipe();
+        }
     }
 
     private void ResetSwipe()

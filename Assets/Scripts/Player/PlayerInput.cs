@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (vectorUp)
             _mover.TryMoveUp();
-        else if (!vectorUp)
+        else if (vectorUp == false)
             _mover.TryMoveDown();
     }
 

@@ -12,11 +12,16 @@ public class PearlsCount : MonoBehaviour
 
     private void Start()
     {
-        CalculateDrawBonusCount();
-        _text.text = _currentNumber.ToString();
+        ActualValue();
     }
 
     public string GetText() => _currentNumber.ToString();
+
+    public void ActualValue()
+    {
+        CalculateDrawBonusCount();
+        _text.text = _currentNumber.ToString();
+    }
 
     private int Load()
     {

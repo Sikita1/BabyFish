@@ -44,10 +44,4 @@ public class Garbage : MonoBehaviour, IPointerClickHandler
         _sprite.color = color;
         _sprite.sortingOrder++;
     }
-
-    private float ShowSmoothly(float value)
-    {
-        while (true)
-            return Mathf.Lerp(0f, value, 5f * Time.deltaTime);
-    }
 }

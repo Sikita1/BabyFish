@@ -9,6 +9,10 @@ public class ClearScreen : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private PanelColor _panelColor;
     [SerializeField] private ClearProgressPanel _progressPanel;
+    [SerializeField] private PearlsCount _pearlsCount;
+    [SerializeField] private LevelChanged _levelChanged;
+    [SerializeField] private ViewProgress _viewProgress;
+    [SerializeField] private ChangedScore _changedScore;
 
     [SerializeField] private Button _buttonClear;
     [SerializeField] private Button _buttonClose;
@@ -39,6 +43,9 @@ public class ClearScreen : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         _score.ResetInvoice();
+        _pearlsCount.ActualValue();
+        _viewProgress.ViewCurrentScene();
+        _changedScore.OnStartChangingIcon();
         AnimCloseScreen();
     }
 

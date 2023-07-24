@@ -6,6 +6,7 @@ public class AwardAnimator : MonoBehaviour
     [SerializeField] private ChangedScore _score;
     [SerializeField] private GameObject _panel;
     [SerializeField] private PanelColor _panelColor;
+    [SerializeField] private PSAnim _pSAnim;
 
     private void Awake()
     {
@@ -31,5 +32,6 @@ public class AwardAnimator : MonoBehaviour
     private void OnFinish()
     {
         _score.OnStartChangingIcon();
+        _pSAnim.OnStartPS();
     }
 }

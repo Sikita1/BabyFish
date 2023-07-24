@@ -27,10 +27,7 @@ public class ChangedScore : MonoBehaviour
         _spawn.ChangedAward -= ChangeSprite;
     }
 
-    private void ChangeSprite()
-    {
-        _animator.SetBool("isShow", true);
-    }
+    public float GetLerpDuraction() => _lerpDuraction;
 
     public void OnStartChangingIcon()
     {
@@ -43,6 +40,11 @@ public class ChangedScore : MonoBehaviour
             numberSprite = _sprites.Length - 1;
 
         StartCoroutine(Filling(0, 1, _lerpDuraction, numberSprite));
+    }
+
+    private void ChangeSprite()
+    {
+        _animator.SetBool("isShow", true);
     }
 
     private IEnumerator Filling(float startValue, float endValue, float duration, int numberSprite)

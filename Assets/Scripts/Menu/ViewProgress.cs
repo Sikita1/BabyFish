@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,28 +23,54 @@ public class ViewProgress : MonoBehaviour
     private int _location = 0;
     private int _character = 0;
 
+    private int _totalAwards = 57;
+    private int _totalScenes = 60;
+    private int _totalLocations = 12;
+    private int _totalCharacteds = 5;
+    private int _fullPercent = 100;
+
     private void Start()
     {
+        ViewCurrentScene();
         ShowText(_textPearls, $"Жемчуг: {_pearls.GetText()}");
-        ShowText(_textLevels, $"Открыто уровней: {_level.GetCurrentScene()}/60");
-        ShowText(_textLevelOnPanel, $"Текущий уровень: {_level.GetCurrentScene()}");
-        ShowText(_textLocations, $"Открыто локаций: {GetCurrentLocation()}/12");
-        ShowText(_textCharacters, $"Открыто персонажей: {GetCurrentCharacter()}/5");
+        ShowText(_textLocations, $"Открыто локаций: {GetCurrentLocation()}/{_totalLocations.ToString()}");
+        ShowText(_textCharacters, $"Открыто персонажей: {GetCurrentCharacter()}/{_totalCharacteds.ToString()}");
     }
 
     private void OnEnable()
     {
         _button.PanelOpening += OnGetNumberSprite;
+        _button.PanelOpening += OnGetCurrentPercentPassRate;
+        _button.PanelOpening += OnGetCurrentScene;
     }
 
     private void OnDisable()
     {
         _button.PanelOpening -= OnGetNumberSprite;
+        _button.PanelOpening -= OnGetCurrentPercentPassRate;
+        _button.PanelOpening -= OnGetCurrentScene;
+    }
+
+    public void ViewCurrentScene()
+    {
+        ShowText(_textLevelOnPanel, $"Текущий уровень: {_level.GetCurrentScene()}");
+    }
+
+    private void OnGetCurrentScene()
+    {
+        ShowText(_textLevels, $"Открыто уровней: {_level.GetCurrentScene()}/{_totalScenes.ToString()}");
+    }
+
+    private void OnGetCurrentPercentPassRate()
+    {
+        double overallProgress = Math.Round(GetOverallProgress(), 2);
+
+        ShowText(_textProgressGame, $"Всего пройдено: {overallProgress}/{_fullPercent.ToString()}");
     }
 
     private void OnGetNumberSprite()
     {
-        ShowText(_textAwards, $"Награды: {_score.GetNumberSprite()}/57");
+        ShowText(_textAwards, $"Награды: {_score.GetNumberSprite()}/{_totalAwards.ToString()}");
     }
 
     private int GetCurrentLocation()
@@ -113,11 +140,16 @@ public class ViewProgress : MonoBehaviour
 
     private int GetnumberAchievement(int openingScene, int closingScene, int numberAchievement)
     {
+        int number = 0;
+
         if (_level.GetCurrentScene() >= openingScene && _level.GetCurrentScene() < closingScene)
-            return numberAchievement;
-        else
-            return 0;
+            number = numberAchievement;
+
+        return number;
     }
+
+    private float GetOverallProgress() =>
+        ((((float) _level.GetCurrentScene() + (float)_score.GetNumberSprite()) / ((float)_totalAwards + (float)_totalScenes)) * _fullPercent);
 
     private void ShowText(TMP_Text text, string stringText)
     {
