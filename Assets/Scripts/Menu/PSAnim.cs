@@ -16,7 +16,9 @@ public class PSAnim : MonoBehaviour
         _particle.transform.position = _lowerLimit.transform.position;
         _particle.Play();
         _audio.Play();
-        transform.DOMoveY(_upperLimit.transform.position.y, _changedScore.GetLerpDuraction()).SetEase(Ease.Linear).OnComplete(SystemShutdown);
+        transform.DOMoveY(_upperLimit.transform.position.y, _changedScore.GetLerpDuraction())
+                 .SetEase(Ease.Linear)
+                 .OnComplete(SystemShutdown);
     }
 
     private void SystemShutdown()

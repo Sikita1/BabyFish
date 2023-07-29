@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Agava.YandexGames;
 
 public class AwardAnimator : MonoBehaviour
 {
@@ -7,10 +9,22 @@ public class AwardAnimator : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private PanelColor _panelColor;
     [SerializeField] private PSAnim _pSAnim;
+    [SerializeField] private AudioSource _audio;
 
     private void Awake()
     {
+        StartCoroutine(SDKInicialition());
         _panel.SetActive(false);
+    }
+
+    private IEnumerator SDKInicialition()
+    {
+#if !UNITY_EDITOR && UNITY_WEBGL 
+
+        yield return YandexGamesSdk.Initialize();
+
+#endif
+        yield break;
     }
 
     private void OnPanelOn()
@@ -27,6 +41,22 @@ public class AwardAnimator : MonoBehaviour
     private void OnPanelOff()
     {
         _panel.SetActive(false);
+
+        InterstitialAd.Show(
+                onOpenCallback: OpenCallback,
+                onCloseCallback: CloseCallback);
+    }
+
+    private void OpenCallback()
+    {
+        _audio.Pause();
+        Time.timeScale = 0f;
+    }
+
+    private void CloseCallback(bool status)
+    {
+        _audio.Play();
+        Time.timeScale = 1f;
     }
 
     private void OnFinish()

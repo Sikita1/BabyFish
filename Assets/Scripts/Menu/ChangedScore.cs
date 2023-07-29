@@ -10,7 +10,6 @@ public class ChangedScore : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private Score _score;
     [SerializeField] private float _lerpDuraction;
-    [SerializeField] private int _countNewBonus;
 
     private void Start()
     {

@@ -300,7 +300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.17968494, y: 0.19562598}
   m_AnchorMax: {x: 0.814, y: 0.87073743}
-  m_AnchoredPosition: {x: -6.0231895, y: 24.192017}
+  m_AnchoredPosition: {x: -6.0231934, y: 24.192017}
   m_SizeDelta: {x: -253.1464, y: -57.0989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216832504
@@ -5645,7 +5645,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.58049566, y: 0.187}
   m_AnchorMax: {x: 0.83568746, y: 0.46033338}
-  m_AnchoredPosition: {x: 3.0314941, y: 4.9993896}
+  m_AnchoredPosition: {x: 3.0314941, y: 4.9993877}
   m_SizeDelta: {x: -6.0631, y: 15.800003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &361515651
@@ -16349,7 +16349,6 @@ MonoBehaviour:
   _stateMusic: {fileID: 1760831599}
   _musicOff: {fileID: 21300000, guid: 5e7f573f3709fb341b4be806bbf09e51, type: 3}
   _musicOn: {fileID: 21300000, guid: d75b0da6b364abc4da3ed950a85d87ad, type: 3}
-  _isOnOffMusic: 0
   _slider: {fileID: 412282745}
 --- !u!1 &556675309
 GameObject:
@@ -16782,6 +16781,7 @@ MonoBehaviour:
   _spawner: {fileID: 1011588149}
   _player: {fileID: 1736128695}
   _buttonPause: {fileID: 1335764743}
+  _audio: {fileID: 584793695}
 --- !u!114 &584793694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17776,7 +17776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16756251, y: 0.187}
   m_AnchorMax: {x: 0.41900003, y: 0.46033338}
-  m_AnchoredPosition: {x: 0.43695068, y: 4.998413}
+  m_AnchoredPosition: {x: 0.43695068, y: 4.998411}
   m_SizeDelta: {x: 0.8740001, y: 15.798798}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &894744822
@@ -23073,7 +23073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.28589895, y: 0.28347135}
   m_AnchorMax: {x: 0.716, y: 0.8492223}
-  m_AnchoredPosition: {x: 0.52319336, y: 20.215096}
+  m_AnchoredPosition: {x: 0.52319336, y: 20.215088}
   m_SizeDelta: {x: -2.0535965, y: -37.1453}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1041458423
@@ -29045,7 +29045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.061616287, y: 0.20569901}
   m_AnchorMax: {x: 0.95800006, y: 0.8628674}
-  m_AnchoredPosition: {x: -3.4999714, y: -3.999938}
+  m_AnchoredPosition: {x: -3.4999695, y: -3.999939}
   m_SizeDelta: {x: 37, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1513826796
@@ -29624,7 +29624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.17968494, y: 0.19562598}
   m_AnchorMax: {x: 0.814, y: 0.87073743}
-  m_AnchoredPosition: {x: -6.0231895, y: 24.192017}
+  m_AnchoredPosition: {x: -6.0231934, y: 24.192017}
   m_SizeDelta: {x: -253.1464, y: -57.0989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637044962

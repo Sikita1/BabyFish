@@ -13,6 +13,7 @@ public class SpawnGarbages : MonoBehaviour
     [SerializeField] private Transform _maxRandomY;
     [SerializeField] private Score _score;
 
+    [SerializeField] private int _numberPoints;
     [SerializeField] private int _leftoverTrash;
 
     public UnityAction ChangedAward;
@@ -22,7 +23,6 @@ public class SpawnGarbages : MonoBehaviour
 
     private float _interval = 0.4f;
     private int _fullTurn = 360;
-    private int _numberPoints = 30;
 
     public int CollectedCount { get; private set; }
 

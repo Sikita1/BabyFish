@@ -16349,7 +16349,6 @@ MonoBehaviour:
   _stateMusic: {fileID: 1760831599}
   _musicOff: {fileID: 21300000, guid: 5e7f573f3709fb341b4be806bbf09e51, type: 3}
   _musicOn: {fileID: 21300000, guid: d75b0da6b364abc4da3ed950a85d87ad, type: 3}
-  _isOnOffMusic: 0
   _slider: {fileID: 412282745}
 --- !u!1 &556675309
 GameObject:
@@ -16781,6 +16780,7 @@ MonoBehaviour:
   _spawner: {fileID: 1011588149}
   _player: {fileID: 1736128695}
   _buttonPause: {fileID: 1335764743}
+  _audio: {fileID: 584793695}
 --- !u!114 &584793694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16807,7 +16807,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0ef332ef2c39d3240887a0d6f90162a9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -28296,7 +28296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.061616287, y: 0.20569901}
   m_AnchorMax: {x: 0.95800006, y: 0.8628674}
-  m_AnchoredPosition: {x: -3.500122, y: -3.9999232}
+  m_AnchoredPosition: {x: -3.500122, y: -3.9999237}
   m_SizeDelta: {x: 37, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1513826796
