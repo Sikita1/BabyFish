@@ -22,9 +22,9 @@ public class PanelColor : MonoBehaviour
 
     public void StartOff()
     {
-        //if (_coroutine != null)
         StopCoroutine(_coroutine);
         _coroutine = StartCoroutine(Blackout(_maxAlfa, 0f));
+        StopCoroutine(DelayClosePanel());
         StartCoroutine(DelayClosePanel());
     }
 

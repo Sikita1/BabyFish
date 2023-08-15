@@ -61,7 +61,7 @@ public class SpawnGarbages : MonoBehaviour
 
     private void ShiftAward()
     {
-        if (CollectedCount % _numberPoints == 0)
+        if (_score.GetScore() % _numberPoints == 0)
             ChangedAward?.Invoke();
     }
 

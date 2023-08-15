@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 public class EndGame : MonoBehaviour
 {
     [SerializeField] private Image _image1;
@@ -12,7 +11,7 @@ public class EndGame : MonoBehaviour
     [SerializeField] private TMP_Text _button;
     [SerializeField] private TMP_Text _gratitudeText;
 
-    private string _gratitude = "Спасибо";
+    private string _gratitude = "Вы справились! Благодаря Вам, мне удалось вернуть всех моих детишек.";
     private string _textMenu = "Меню";
 
     private void Start()

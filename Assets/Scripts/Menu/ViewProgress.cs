@@ -27,23 +27,16 @@ public class ViewProgress : MonoBehaviour
     private void Start()
     {
         ViewCurrentScene();
-        ShowText(_textPearls, $"Жемчуг: {_pearls.GetText()}");
-        ShowText(_textLocations, $"Открыто локаций: {GetCurrentLocation()}/{_totalLocations.ToString()}");
-        ShowText(_textCharacters, $"Открыто персонажей: {GetCurrentCharacter()}/{_totalCharacteds.ToString()}");
     }
 
     private void OnEnable()
     {
-        _button.PanelOpening += OnGetNumberSprite;
-        _button.PanelOpening += OnGetCurrentPercentPassRate;
-        _button.PanelOpening += OnGetCurrentScene;
+        _button.PanelOpening += OnGetCurrentStatistics;
     }
 
     private void OnDisable()
     {
-        _button.PanelOpening -= OnGetNumberSprite;
-        _button.PanelOpening -= OnGetCurrentPercentPassRate;
-        _button.PanelOpening -= OnGetCurrentScene;
+        _button.PanelOpening -= OnGetCurrentStatistics;
     }
 
     public void ViewCurrentScene()
@@ -51,21 +44,16 @@ public class ViewProgress : MonoBehaviour
         ShowText(_textLevelOnPanel, $"Текущий уровень: {_level.GetCurrentScene()}");
     }
 
-    private void OnGetCurrentScene()
-    {
-        ShowText(_textLevels, $"Открыто уровней: {_level.GetCurrentScene()}/{_totalScenes.ToString()}");
-    }
-
-    private void OnGetCurrentPercentPassRate()
+    private void OnGetCurrentStatistics()
     {
         double overallProgress = Math.Round(GetOverallProgress(), 2);
 
+        ShowText(_textCharacters, $"Открыто персонажей: {GetCurrentCharacter()}/{_totalCharacteds.ToString()}");
+        ShowText(_textLocations, $"Открыто локаций: {GetCurrentLocation()}/{_totalLocations.ToString()}");
+        ShowText(_textLevels, $"Открыто уровней: {_level.GetCurrentScene()}/{_totalScenes.ToString()}");
         ShowText(_textProgressGame, $"Всего пройдено: {overallProgress}/{_fullPercent.ToString()}");
-    }
-
-    private void OnGetNumberSprite()
-    {
         ShowText(_textAwards, $"Награды: {_score.GetNumberSprite()}/{_totalAwards.ToString()}");
+        ShowText(_textPearls, $"Жемчуг: {_pearls.GetText()}");
     }
 
     private int GetCurrentLocation()

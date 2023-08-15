@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +21,7 @@ public class PlayAchiv : MonoBehaviour
         StartCoroutine(_coroutine);
     }
 
-    public void OnStartGame()
+    public void OnPlayGame()
     {
         Time.timeScale = 1f;
     }

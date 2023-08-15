@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class MovePlayerDisplayControl : MonoBehaviour
@@ -12,19 +11,17 @@ public class MovePlayerDisplayControl : MonoBehaviour
     private float _deadZone = 0;
 
     private bool _isSwiping;
-    private bool _isMobile;
+    //private bool _isMobile;
 
-    private void Start()
-    {
-        _isMobile = Application.isMobilePlatform;
-    }
+    //private void Start()
+    //{
+    //    _isMobile = Application.isMobilePlatform;
+    //}
 
     private void Update()
     {
-        CheckSwipe();
-
-        if (_isMobile == false)
-        {
+        //if (_isMobile == false)
+        //{
             if (Input.GetMouseButtonDown(0))
             {
                 _isSwiping = true;
@@ -34,23 +31,25 @@ public class MovePlayerDisplayControl : MonoBehaviour
             {
                 ResetSwipe();
             }
-        }
-        else
-        {
-            if (Input.touchCount > 0)
-            {
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
-                {
-                    _isSwiping = true;
-                    _tapPosition = Input.GetTouch(0).position;
-                }
-                else if (Input.GetTouch(0).phase == TouchPhase.Canceled ||
-                         Input.GetTouch(0).phase == TouchPhase.Ended)
-                {
-                    ResetSwipe();
-                }
-            }
-        }
+        //}
+        //else if(_isMobile)
+        //{
+        //    if (Input.touchCount > 0)
+        //    {
+        //        if (Input.GetTouch(0).phase == TouchPhase.Began)
+        //        {
+        //            _isSwiping = true;
+        //            _tapPosition = Input.GetTouch(0).position;
+        //        }
+        //        else if (Input.GetTouch(0).phase == TouchPhase.Canceled ||
+        //                 Input.GetTouch(0).phase == TouchPhase.Ended)
+        //        {
+        //            ResetSwipe();
+        //        }
+        //    }
+        //}
+
+        CheckSwipe();
     }
 
     private void CheckSwipe()
@@ -59,7 +58,7 @@ public class MovePlayerDisplayControl : MonoBehaviour
 
         if (_isSwiping == true)
         {
-            if (!_isMobile && Input.GetMouseButton(0))
+            if (/*!_isMobile && */Input.GetMouseButton(0))
                 _swipeDelta = (Vector2)Input.mousePosition - _tapPosition;
             else if (Input.touchCount > 0)
                 _swipeDelta = Input.GetTouch(0).position - _tapPosition;
@@ -68,7 +67,7 @@ public class MovePlayerDisplayControl : MonoBehaviour
         if (_swipeDelta.magnitude > _deadZone)
         {
             if (SwipeEvent != null)
-                SwipeEvent(_swipeDelta.y > 0 ? true : false);
+                SwipeEvent?.Invoke(_swipeDelta.y > 0 ? true : false);
 
                 ResetSwipe();
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    private const string _saveKey = "mainSave";
+    private const string _saveKey = "mainSaves";
 
     public event Action<int> ScoreChanged;
 

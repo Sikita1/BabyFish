@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour

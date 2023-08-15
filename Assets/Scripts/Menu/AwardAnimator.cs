@@ -50,13 +50,11 @@ public class AwardAnimator : MonoBehaviour
     private void OpenCallback()
     {
         _audio.Pause();
-        Time.timeScale = 0f;
     }
 
     private void CloseCallback(bool status)
     {
         _audio.Play();
-        Time.timeScale = 1f;
     }
 
     private void OnFinish()

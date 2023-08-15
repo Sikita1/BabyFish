@@ -1,23 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Agava.YandexGames;
-using System;
+using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class CanvasGameOver : MonoBehaviour
 {
+    [SerializeField] private GamePauseScreen _gamePauseScreen;
     [SerializeField] private GameOverScreen _gameOverScreen;
     [SerializeField] private GameWinScreen _gameWinScreen;
-    [SerializeField] private GamePauseScreen _gamePauseScreen;
+    [SerializeField] private ButtonPause _buttonPause;
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private SliderTimeLevel _slider;
     [SerializeField] private LevelFinisher _finisher;
     [SerializeField] private EnemyMover _enemyMover;
+    [SerializeField] private AudioSource _audio;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private Player _player;
-    [SerializeField] private ButtonPause _buttonPause;
-
-    [SerializeField] private AudioSource _audio;
 
     private void Awake()
     {
@@ -27,9 +26,30 @@ public class CanvasGameOver : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
+        Debug.Log("1");
+
         _gameOverScreen.gameObject.SetActive(false);
         _gameWinScreen.gameObject.SetActive(false);
         _gamePauseScreen.gameObject.SetActive(false);
+
+        ShowADS();
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus == false)
+        {
+            OpenCallback();
+        }
+        else
+        {
+            CloseCallback(true);
+
+            if (_gameOverScreen.gameObject.activeSelf == true ||
+                _gameWinScreen.gameObject.activeSelf == true ||
+                _gamePauseScreen.gameObject.activeSelf == true)
+                Time.timeScale = 0f;
+        }
     }
 
     private void OnEnable()
@@ -62,9 +82,13 @@ public class CanvasGameOver : MonoBehaviour
         return isState;
     }
 
-    private void ShowADS()
+    private IEnumerator ShowADS()
     {
-        if(IsRunAds() == false)
+        yield return new WaitForSecondsRealtime(1);
+
+        Debug.Log("2");
+
+        if (IsRunAds() == false)
             InterstitialAd.Show(
                 onOpenCallback: OpenCallback,
                 onCloseCallback: CloseCallback);
@@ -72,14 +96,16 @@ public class CanvasGameOver : MonoBehaviour
 
     private void OpenCallback()
     {
-        _audio.Pause();
         Time.timeScale = 0f;
+        _audio.Pause();
+        Debug.Log("3");
     }
 
     private void CloseCallback(bool status)
     {
-        _audio.Play();
         Time.timeScale = 1f;
+        Debug.Log("4");
+        _audio.Play();
     }
 
     private void OnWin()
@@ -87,8 +113,6 @@ public class CanvasGameOver : MonoBehaviour
         _gameWinScreen.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
         Time.timeScale = 0f;
-
-        ShowADS();
     }
 
     private void OnLoss()
@@ -96,7 +120,5 @@ public class CanvasGameOver : MonoBehaviour
         _gameOverScreen.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
         Time.timeScale = 0f;
-
-        ShowADS();
     }
 }
