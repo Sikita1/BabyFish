@@ -38,7 +38,6 @@ public class GamePausePanel : MonoBehaviour
         Time.timeScale = 1f;
         _panelColor.StartOff();
         _animator.SetBool("Open", false);
-        //_panelColor.gameObject.SetActive(false);
     }
 
     private void ButtonClick(int scene)

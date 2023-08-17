@@ -10,10 +10,19 @@ public class ChangedScore : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private Score _score;
     [SerializeField] private float _lerpDuraction;
+    [SerializeField] private AudioSource _audio;
 
     private void Start()
     {
         OnStartChangingIcon();
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus == false)
+            PauseGame();
+        else
+            PlayGame();
     }
 
     private void OnEnable()
@@ -27,6 +36,8 @@ public class ChangedScore : MonoBehaviour
     }
 
     public float GetLerpDuraction() => _lerpDuraction;
+
+    public int GetNumberSprite() => _score.GetScore() / _spawn.GetNumberPoints();
 
     public void OnStartChangingIcon()
     {
@@ -63,5 +74,15 @@ public class ChangedScore : MonoBehaviour
         _animator.SetBool("isShow", false);
     }
 
-    public int GetNumberSprite() => _score.GetScore() / _spawn.GetNumberPoints();
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+        _audio.Pause();
+    }
+
+    private void PlayGame()
+    {
+        Time.timeScale = 1f;
+        _audio.Play();
+    }
 }

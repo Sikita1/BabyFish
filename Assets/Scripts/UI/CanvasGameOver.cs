@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Agava.YandexGames;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(AudioSource))]
 public class CanvasGameOver : MonoBehaviour
@@ -17,39 +18,68 @@ public class CanvasGameOver : MonoBehaviour
     [SerializeField] private AudioSource _audio;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private Player _player;
+    [SerializeField] private Training _training; 
+
+    //private YandexSDK _yandexSDK;
+
+    private bool _isADS;
+    private bool _isFocus;
+
+    private Coroutine _coroutine;
 
     private void Awake()
     {
+        //_yandexSDK = YandexSDK.Instance;
         _audio = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        Time.timeScale = 1f;
-        Debug.Log("1");
-
         _gameOverScreen.gameObject.SetActive(false);
         _gameWinScreen.gameObject.SetActive(false);
         _gamePauseScreen.gameObject.SetActive(false);
 
-        ShowADS();
+        //ADS();
+        _coroutine = StartCoroutine(ShowADS());
     }
 
-    private void OnApplicationFocus(bool focus)
+    private void Update()
     {
-        if (focus == false)
+        if (_isFocus == false || _isADS == true || _training.gameObject.activeSelf == true)
         {
-            OpenCallback();
+            Pause();
         }
         else
         {
-            CloseCallback(true);
+            Resume();
 
             if (_gameOverScreen.gameObject.activeSelf == true ||
                 _gameWinScreen.gameObject.activeSelf == true ||
                 _gamePauseScreen.gameObject.activeSelf == true)
                 Time.timeScale = 0f;
         }
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        //if (focus == false || _isADS == true || _training.gameObject.activeSelf == true)
+        //{
+        //    Pause();
+        //}
+        //else
+        //{
+        //    Resume();
+
+        //    if (_gameOverScreen.gameObject.activeSelf == true ||
+        //        _gameWinScreen.gameObject.activeSelf == true ||
+        //        _gamePauseScreen.gameObject.activeSelf == true)
+        //        Time.timeScale = 0f;
+        //}
+
+        if (focus == false)
+            _isFocus = false;
+        else
+            _isFocus = true;
     }
 
     private void OnEnable()
@@ -84,27 +114,39 @@ public class CanvasGameOver : MonoBehaviour
 
     private IEnumerator ShowADS()
     {
-        yield return new WaitForSecondsRealtime(1);
-
-        Debug.Log("2");
+        yield return new WaitForSeconds(0.5f);
 
         if (IsRunAds() == false)
             InterstitialAd.Show(
-                onOpenCallback: OpenCallback,
-                onCloseCallback: CloseCallback);
+                onOpenCallback: OnOpenADS,
+                onCloseCallback: OnCloseADS);
     }
 
-    private void OpenCallback()
+    private void OnCloseADS(bool obj)
+    {
+        _isADS = false;
+        StopCoroutine(ShowADS());
+    }
+
+    private void OnOpenADS()
+    {
+        _isADS = true; 
+    }
+
+    //private void ADS()
+    //{
+    //    _yandexSDK.ShowInterstitial(OpenCallback, CloseCallback);
+    //}
+
+    private void Pause()
     {
         Time.timeScale = 0f;
         _audio.Pause();
-        Debug.Log("3");
     }
 
-    private void CloseCallback(bool status)
+    private void Resume()
     {
         Time.timeScale = 1f;
-        Debug.Log("4");
         _audio.Play();
     }
 

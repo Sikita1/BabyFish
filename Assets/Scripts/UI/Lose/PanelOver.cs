@@ -31,12 +31,12 @@ public class PanelOver : MonoBehaviour
 
     public void OnRestartButtonClick()
     {
-        Time.timeScale = 1f;
         ButtonClick(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void ButtonClick(int scene)
     {
+        Time.timeScale = 1f;
         _animatorBlackPanel.SetTrigger("Fade");
         _animator.SetBool("Open", false);
         StartCoroutine(DelayOpenScene(scene));

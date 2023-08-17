@@ -16,7 +16,7 @@ public class ButtonMusic : MonoBehaviour
 
     private float _defaultSound = 0.5f;
 
-    private void Start()
+    private void Awake()
     {
         Load();
         ShowAudioStatus();

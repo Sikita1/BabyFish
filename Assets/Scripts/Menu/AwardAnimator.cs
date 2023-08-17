@@ -27,6 +27,14 @@ public class AwardAnimator : MonoBehaviour
         yield break;
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus == false)
+            OpenCallback();
+        else
+            CloseCallback(true);
+    }
+
     private void OnPanelOn()
     {
         _panel.SetActive(true);

@@ -15,6 +15,16 @@ public class ProgressPanel : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private void OnDeactiveButton()
+    {
+        _closePanel.gameObject.SetActive(false);
+    }
+
+    private void OnActivButton()
+    {
+        _closePanel.gameObject.SetActive(true);
+    }
+
     public void OnClose()
     {
         _panel.StartOff();

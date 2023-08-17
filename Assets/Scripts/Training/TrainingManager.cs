@@ -11,7 +11,7 @@ public class TrainingManager : MonoBehaviour
     [SerializeField] private Image _history;
     [SerializeField] private Image _training;
     [SerializeField] private TMP_Text _button;
-    [SerializeField] private GameObject _canvas;
+    [SerializeField] private Training _canvas;
     [SerializeField] private Button _buttonNext;
 
     private Queue<string> _sentences;
@@ -92,7 +92,7 @@ public class TrainingManager : MonoBehaviour
         if (_button.text == "Начать игру")
         {
             _canvas.gameObject.SetActive(false);
-            Time.timeScale = 1f;
+            //Time.timeScale = 1f;
         }
     }
 }
