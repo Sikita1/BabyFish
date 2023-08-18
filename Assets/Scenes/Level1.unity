@@ -28264,6 +28264,7 @@ MonoBehaviour:
   _button: {fileID: 1501916892}
   _canvas: {fileID: 653719253}
   _buttonNext: {fileID: 653904971}
+  _canvasGame: {fileID: 584793692}
 --- !u!4 &992586607
 Transform:
   m_ObjectHideFlags: 0

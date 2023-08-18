@@ -35,21 +35,19 @@ public class CanvasGameOver : MonoBehaviour
 
     private void Start()
     {
+        Resume();
+
         _gameOverScreen.gameObject.SetActive(false);
         _gameWinScreen.gameObject.SetActive(false);
         _gamePauseScreen.gameObject.SetActive(false);
 
         //ADS();
-        _coroutine = StartCoroutine(ShowADS());
+        ShowADS();
     }
 
     private void Update()
     {
-        if (_isFocus == false || _isADS == true || _training.gameObject.activeSelf == true)
-        {
-            Pause();
-        }
-        else
+        if (_isFocus == true && _isADS == false && _training.gameObject.activeSelf == false)
         {
             Resume();
 
@@ -58,6 +56,28 @@ public class CanvasGameOver : MonoBehaviour
                 _gamePauseScreen.gameObject.activeSelf == true)
                 Time.timeScale = 0f;
         }
+        else
+        {
+            Pause();
+        }
+
+        Debug.Log($"_isFocus{_isFocus}");
+        Debug.Log($"_isADS{_isADS}");
+        Debug.Log($"_training{_training.gameObject.activeSelf}");
+
+        //if (_isFocus == false || _isADS == true || _training.gameObject.activeSelf == true)
+        //{
+        //    Pause();
+        //}
+        //else
+        //{
+        //    Resume();
+
+        //    if (_gameOverScreen.gameObject.activeSelf == true ||
+        //        _gameWinScreen.gameObject.activeSelf == true ||
+        //        _gamePauseScreen.gameObject.activeSelf == true)
+        //        Time.timeScale = 0f;
+        //}
     }
 
     private void OnApplicationFocus(bool focus)
@@ -94,6 +114,8 @@ public class CanvasGameOver : MonoBehaviour
         _player.Died -= OnLoss;
     }
 
+    public void FocusTrue() => _isFocus = true;
+
     public void OnPause()
     {
         _gamePauseScreen.gameObject.SetActive(true);
@@ -112,10 +134,8 @@ public class CanvasGameOver : MonoBehaviour
         return isState;
     }
 
-    private IEnumerator ShowADS()
+    private void ShowADS()
     {
-        yield return new WaitForSeconds(0.5f);
-
         if (IsRunAds() == false)
             InterstitialAd.Show(
                 onOpenCallback: OnOpenADS,
@@ -125,7 +145,6 @@ public class CanvasGameOver : MonoBehaviour
     private void OnCloseADS(bool obj)
     {
         _isADS = false;
-        StopCoroutine(ShowADS());
     }
 
     private void OnOpenADS()
@@ -140,14 +159,14 @@ public class CanvasGameOver : MonoBehaviour
 
     private void Pause()
     {
-        Time.timeScale = 0f;
         _audio.Pause();
+        Time.timeScale = 0f;
     }
 
     private void Resume()
     {
         Time.timeScale = 1f;
-        _audio.Play();
+        _audio.UnPause();
     }
 
     private void OnWin()

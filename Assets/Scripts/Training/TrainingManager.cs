@@ -14,6 +14,8 @@ public class TrainingManager : MonoBehaviour
     [SerializeField] private Training _canvas;
     [SerializeField] private Button _buttonNext;
 
+    [SerializeField] private CanvasGameOver _canvasGame;
+
     private Queue<string> _sentences;
 
     private Coroutine _corutine;
@@ -92,6 +94,7 @@ public class TrainingManager : MonoBehaviour
         if (_button.text == "Начать игру")
         {
             _canvas.gameObject.SetActive(false);
+            _canvasGame.FocusTrue();
             //Time.timeScale = 1f;
         }
     }
