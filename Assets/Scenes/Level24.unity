@@ -16729,8 +16729,11 @@ MonoBehaviour:
   _finisher: {fileID: 584793694}
   _enemyMover: {fileID: 8051561697116617233, guid: 9250642d8bdaf80429a9873d0c62ba14, type: 3}
   _audio: {fileID: 584793695}
+  _training: {fileID: 0}
   _spawner: {fileID: 1011588149}
   _player: {fileID: 356606221}
+  _achiv: {fileID: 0}
+  _winPanel: {fileID: 2006067589}
 --- !u!114 &584793694
 MonoBehaviour:
   m_ObjectHideFlags: 0

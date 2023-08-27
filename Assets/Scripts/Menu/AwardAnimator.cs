@@ -11,6 +11,8 @@ public class AwardAnimator : MonoBehaviour
     [SerializeField] private PSAnim _pSAnim;
     [SerializeField] private AudioSource _audio;
 
+    public bool IsADS { get; private set; }
+
     private void Awake()
     {
         StartCoroutine(SDKInicialition());
@@ -25,14 +27,6 @@ public class AwardAnimator : MonoBehaviour
 
 #endif
         yield break;
-    }
-
-    private void OnApplicationFocus(bool focus)
-    {
-        if (focus == false)
-            OpenCallback();
-        else
-            CloseCallback(true);
     }
 
     private void OnPanelOn()
@@ -57,12 +51,12 @@ public class AwardAnimator : MonoBehaviour
 
     private void OpenCallback()
     {
-        _audio.Pause();
+        IsADS = true;
     }
 
     private void CloseCallback(bool status)
     {
-        _audio.Play();
+        IsADS = false;
     }
 
     private void OnFinish()

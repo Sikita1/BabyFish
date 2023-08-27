@@ -8,13 +8,11 @@ public class TrainingManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _dialogue;
 
-    [SerializeField] private Image _history;
-    [SerializeField] private Image _training;
+    [SerializeField] private Image _historyImage;
+    [SerializeField] private Image _trainingImage;
     [SerializeField] private TMP_Text _button;
     [SerializeField] private Training _canvas;
     [SerializeField] private Button _buttonNext;
-
-    [SerializeField] private CanvasGameOver _canvasGame;
 
     private Queue<string> _sentences;
 
@@ -27,7 +25,7 @@ public class TrainingManager : MonoBehaviour
 
     public void StartTraining()
     {
-        _training.gameObject.SetActive(false);
+        _trainingImage.gameObject.SetActive(false);
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -83,8 +81,8 @@ public class TrainingManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        _history.gameObject.SetActive(false);
-        _training.gameObject.SetActive(true);
+        _historyImage.gameObject.SetActive(false);
+        _trainingImage.gameObject.SetActive(true);
 
         _button.text = "Начать игру";
     }
@@ -94,8 +92,7 @@ public class TrainingManager : MonoBehaviour
         if (_button.text == "Начать игру")
         {
             _canvas.gameObject.SetActive(false);
-            _canvasGame.FocusTrue();
-            //Time.timeScale = 1f;
+            Time.timeScale = 1f;
         }
     }
 }

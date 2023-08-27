@@ -10,12 +10,11 @@ public class PlayAchiv : MonoBehaviour
 
     [SerializeField] private AudioSource _audioSource;
 
-    IEnumerator _coroutine;
+    private IEnumerator _coroutine;
 
     private void Start()
     {
         _image.transform.localScale = new Vector3(0,0,0);
-        StartCoroutine(OnStopGame());
         _coroutine = OnClosePanel();
         StartCoroutine(OnOpenPanel());
         StartCoroutine(_coroutine);
@@ -47,12 +46,5 @@ public class PlayAchiv : MonoBehaviour
         _animator = GetComponent<Animator>();
         _image.transform.localScale = new Vector3(1, 1, 1);
         _panelColor.StartOn();
-    }
-
-    private IEnumerator OnStopGame()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        Time.timeScale = 0f;
     }
 }

@@ -36,7 +36,7 @@ public class LevelChanged : MonoBehaviour
     {
         Time.timeScale = 1f;
         var times = _animator.GetCurrentAnimatorClipInfo(0);
-        WaitForSeconds wait = new WaitForSeconds(times.Length);
+        WaitForSecondsRealtime wait = new WaitForSecondsRealtime(times.Length);
 
         yield return wait;
 

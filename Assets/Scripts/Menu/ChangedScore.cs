@@ -12,17 +12,27 @@ public class ChangedScore : MonoBehaviour
     [SerializeField] private float _lerpDuraction;
     [SerializeField] private AudioSource _audio;
 
+    [SerializeField] private AwardAnimator _award;
+
+    private bool _isFocus;
+
     private void Start()
     {
+        _isFocus = true;
         OnStartChangingIcon();
+    }
+
+    private void Update()
+    {
+        if (_isFocus == true && _award.IsADS == false)
+            PlayGame();
+        else
+            PauseGame();
     }
 
     private void OnApplicationFocus(bool focus)
     {
-        if (focus == false)
-            PauseGame();
-        else
-            PlayGame();
+        _isFocus = focus;
     }
 
     private void OnEnable()
@@ -83,6 +93,6 @@ public class ChangedScore : MonoBehaviour
     private void PlayGame()
     {
         Time.timeScale = 1f;
-        _audio.Play();
+        _audio.UnPause();
     }
 }

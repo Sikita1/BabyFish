@@ -16,16 +16,16 @@ public class CanvasGameOver : MonoBehaviour
     [SerializeField] private LevelFinisher _finisher;
     [SerializeField] private EnemyMover _enemyMover;
     [SerializeField] private AudioSource _audio;
+    [SerializeField] private Training _training;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private Player _player;
-    [SerializeField] private Training _training; 
+    [SerializeField] private Achiv _achiv;
+
+    [SerializeField] private GameWinPanel _winPanel;
 
     //private YandexSDK _yandexSDK;
 
-    private bool _isADS;
     private bool _isFocus;
-
-    private Coroutine _coroutine;
 
     private void Awake()
     {
@@ -35,6 +35,8 @@ public class CanvasGameOver : MonoBehaviour
 
     private void Start()
     {
+        _isFocus = true;
+        
         Resume();
 
         _gameOverScreen.gameObject.SetActive(false);
@@ -42,12 +44,15 @@ public class CanvasGameOver : MonoBehaviour
         _gamePauseScreen.gameObject.SetActive(false);
 
         //ADS();
-        ShowADS();
+        //ShowADS();
     }
 
     private void Update()
     {
-        if (_isFocus == true && _isADS == false && _training.gameObject.activeSelf == false)
+        if (_isFocus == true
+            && _winPanel.IsADS == false
+            && (_training == null || _training.gameObject.activeSelf == false)
+            && (_achiv == null || _achiv.gameObject.activeSelf == false))
         {
             Resume();
 
@@ -60,46 +65,11 @@ public class CanvasGameOver : MonoBehaviour
         {
             Pause();
         }
-
-        Debug.Log($"_isFocus{_isFocus}");
-        Debug.Log($"_isADS{_isADS}");
-        Debug.Log($"_training{_training.gameObject.activeSelf}");
-
-        //if (_isFocus == false || _isADS == true || _training.gameObject.activeSelf == true)
-        //{
-        //    Pause();
-        //}
-        //else
-        //{
-        //    Resume();
-
-        //    if (_gameOverScreen.gameObject.activeSelf == true ||
-        //        _gameWinScreen.gameObject.activeSelf == true ||
-        //        _gamePauseScreen.gameObject.activeSelf == true)
-        //        Time.timeScale = 0f;
-        //}
     }
 
     private void OnApplicationFocus(bool focus)
     {
-        //if (focus == false || _isADS == true || _training.gameObject.activeSelf == true)
-        //{
-        //    Pause();
-        //}
-        //else
-        //{
-        //    Resume();
-
-        //    if (_gameOverScreen.gameObject.activeSelf == true ||
-        //        _gameWinScreen.gameObject.activeSelf == true ||
-        //        _gamePauseScreen.gameObject.activeSelf == true)
-        //        Time.timeScale = 0f;
-        //}
-
-        if (focus == false)
-            _isFocus = false;
-        else
-            _isFocus = true;
+        _isFocus = focus;
     }
 
     private void OnEnable()
@@ -114,43 +84,41 @@ public class CanvasGameOver : MonoBehaviour
         _player.Died -= OnLoss;
     }
 
-    public void FocusTrue() => _isFocus = true;
-
     public void OnPause()
     {
         _gamePauseScreen.gameObject.SetActive(true);
-        Time.timeScale = 0f;
     }
 
-    private bool IsRunAds()
-    {
-        int[] numberScene = new int[] { 1, 3, 5, 7, 9, 11 };
-        bool isState = false;
+    //private bool IsRunAds()
+    //{
+    //    int[] numberScene = new int[] { 1, 3, 7, 11, 15, 19, 23, 27, 31, 34, 37, 41, 45, 48, 51, 55 };
+    //    bool isState = false;
 
-        for (int i = 0; i < numberScene.Length - 1; i++)
-            if (SceneManager.GetActiveScene().buildIndex == numberScene[i])
-                isState = true;
+    //    for (int i = 0; i < numberScene.Length - 1; i++)
+    //        if (SceneManager.GetActiveScene().buildIndex == numberScene[i])
+    //            isState = true;
 
-        return isState;
-    }
+    //    return isState;
+    //}
 
-    private void ShowADS()
-    {
-        if (IsRunAds() == false)
-            InterstitialAd.Show(
-                onOpenCallback: OnOpenADS,
-                onCloseCallback: OnCloseADS);
-    }
+    //private void ShowADS()
+    //{
+    //    if (IsRunAds() == false)
+    //        InterstitialAd.Show(
+    //            onOpenCallback: OnOpenADS,
+    //            onCloseCallback: OnCloseADS);
+    //}
 
-    private void OnCloseADS(bool obj)
-    {
-        _isADS = false;
-    }
+    //private void OnCloseADS(bool obj)
+    //{
+    //    _isADS = false;
+    //}
 
-    private void OnOpenADS()
-    {
-        _isADS = true; 
-    }
+    //private void OnOpenADS()
+    //{
+    //    OnPause();
+    //    _isADS = true;
+    //}
 
     //private void ADS()
     //{
@@ -173,13 +141,11 @@ public class CanvasGameOver : MonoBehaviour
     {
         _gameWinScreen.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
-        Time.timeScale = 0f;
     }
 
     private void OnLoss()
     {
         _gameOverScreen.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
-        Time.timeScale = 0f;
     }
 }
