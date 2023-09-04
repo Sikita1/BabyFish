@@ -10,24 +10,28 @@ public class GameWinPanel : MonoBehaviour
     [SerializeField] private PanelColor _panelColor;
     [SerializeField] private TMP_Text _buttonNextLevelText;
 
+    [SerializeField] private float _adCooldown = 60;
+
     private const string _saveKey = "saveScene";
 
     public bool IsADS { get; private set; }
 
     private Animator _animator;
-    private bool _isADSShow;
+    private bool _canShowADS;
+
+    private float _nowTime;
+    //private float _nowTime;
 
     private void Start()
     {
-        _isADSShow = true;
+        //#if UNITY_EDITOR == false
+        //        _canShowADS = true;
+        //#else
+        //        _canShowADS = false;
+        //#endif
         _buttonNextLevelText.text = $"Следующий уровень: {GetCurrentScene()}";
         _panelColor.StartOn();
         _animator = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        Debug.Log($"{_isADSShow}");
     }
 
     private void OnEnable()
@@ -37,22 +41,36 @@ public class GameWinPanel : MonoBehaviour
 
     public void NextLevelButtonClick()
     {
-        if (_isADSShow == true)
-        {
+#if UNITY_EDITOR == false
+if(CanShowADS && IsRunAds() == false)
+{
             ShowADS();
-        }
-        else
-        {
-            _animatorScreenWin.SetTrigger("Fade");
-            _animator.SetBool("Open", false);
-            StartCoroutine(FadeComplete(GetCurrentScene()));
-        }
+            return;
+}
+#endif
 
+        _animatorScreenWin.SetTrigger("Fade");
+        _animator.SetBool("Open", false);
+        StartCoroutine(FadeComplete(GetCurrentScene()));
+
+        //if (_canShowADS == true)
+        //{
+        //}
+        //else
+        //{
+        //    _animatorScreenWin.SetTrigger("Fade");
+        //    _animator.SetBool("Open", false);
+        //    StartCoroutine(FadeComplete(GetCurrentScene()));
+        //}
+
+        //_canShowADS = false;
     }
+
+    private bool CanShowADS => (Time.unscaledTime - _nowTime) > 0;
 
     private bool IsRunAds()
     {
-        int[] numberScene = new int[] { 1, 3, 7, 11, 15, 19, 23, 27, 31, 34, 37, 41, 45, 48, 51, 55 };
+        int[] numberScene = new int[] { 1, 3, 7, 11, 15, 19, 23, 27, 31, 34, 37, 41, 45, 48, 51, 55, 60 };
         bool isState = false;
 
         for (int i = 0; i < numberScene.Length - 1; i++)
@@ -64,7 +82,7 @@ public class GameWinPanel : MonoBehaviour
 
     private void ShowADS()
     {
-        if (IsRunAds() == false)
+        //if (IsRunAds() == false && CanShowADS)
             InterstitialAd.Show(
                 onOpenCallback: OnOpenADS,
                 onCloseCallback: OnCloseADS);
@@ -72,13 +90,12 @@ public class GameWinPanel : MonoBehaviour
 
     private void OnCloseADS(bool obj)
     {
-        _isADSShow = false;
         IsADS = false;
+        _nowTime = Time.unscaledTime + _adCooldown;
     }
 
     private void OnOpenADS()
     {
-        //_isADSShow = true;
         IsADS = true;
     }
 

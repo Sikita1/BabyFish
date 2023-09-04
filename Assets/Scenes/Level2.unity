@@ -18765,6 +18765,7 @@ MonoBehaviour:
   _animatorScreenWin: {fileID: 556675311}
   _panelColor: {fileID: 2005905160}
   _buttonNextLevelText: {fileID: 1513826796}
+  _adCooldown: 60
 --- !u!95 &921595690
 Animator:
   serializedVersion: 5

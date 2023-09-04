@@ -42,9 +42,6 @@ public class CanvasGameOver : MonoBehaviour
         _gameOverScreen.gameObject.SetActive(false);
         _gameWinScreen.gameObject.SetActive(false);
         _gamePauseScreen.gameObject.SetActive(false);
-
-        //ADS();
-        //ShowADS();
     }
 
     private void Update()
@@ -88,42 +85,6 @@ public class CanvasGameOver : MonoBehaviour
     {
         _gamePauseScreen.gameObject.SetActive(true);
     }
-
-    //private bool IsRunAds()
-    //{
-    //    int[] numberScene = new int[] { 1, 3, 7, 11, 15, 19, 23, 27, 31, 34, 37, 41, 45, 48, 51, 55 };
-    //    bool isState = false;
-
-    //    for (int i = 0; i < numberScene.Length - 1; i++)
-    //        if (SceneManager.GetActiveScene().buildIndex == numberScene[i])
-    //            isState = true;
-
-    //    return isState;
-    //}
-
-    //private void ShowADS()
-    //{
-    //    if (IsRunAds() == false)
-    //        InterstitialAd.Show(
-    //            onOpenCallback: OnOpenADS,
-    //            onCloseCallback: OnCloseADS);
-    //}
-
-    //private void OnCloseADS(bool obj)
-    //{
-    //    _isADS = false;
-    //}
-
-    //private void OnOpenADS()
-    //{
-    //    OnPause();
-    //    _isADS = true;
-    //}
-
-    //private void ADS()
-    //{
-    //    _yandexSDK.ShowInterstitial(OpenCallback, CloseCallback);
-    //}
 
     private void Pause()
     {
