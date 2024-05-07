@@ -47655,7 +47655,6 @@ MonoBehaviour:
   _animatorScreenWin: {fileID: 1133398544}
   _panelColor: {fileID: 43215845}
   _buttonNextLevelText: {fileID: 659599174}
-  _adCooldown: 60
 --- !u!114 &1988246389
 MonoBehaviour:
   m_ObjectHideFlags: 0

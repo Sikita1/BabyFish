@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Agava.YandexGames;
+using YG;
 
 public class GameWinPanel : MonoBehaviour
 {
@@ -10,25 +10,16 @@ public class GameWinPanel : MonoBehaviour
     [SerializeField] private PanelColor _panelColor;
     [SerializeField] private TMP_Text _buttonNextLevelText;
 
-    [SerializeField] private float _adCooldown = 60;
-
     private const string _saveKey = "saveScene";
 
     public bool IsADS { get; private set; }
 
     private Animator _animator;
-    private bool _canShowADS;
 
-    private float _nowTime;
-    //private float _nowTime;
+    private int _timeToADS;
 
     private void Start()
     {
-        //#if UNITY_EDITOR == false
-        //        _canShowADS = true;
-        //#else
-        //        _canShowADS = false;
-        //#endif
         _buttonNextLevelText.text = $"Следующий уровень: {GetCurrentScene()}";
         _panelColor.StartOn();
         _animator = GetComponent<Animator>();
@@ -37,61 +28,52 @@ public class GameWinPanel : MonoBehaviour
     private void OnEnable()
     {
         Save();
+        YandexGame.OpenFullAdEvent += OnOpenADS;
+        YandexGame.CloseFullAdEvent += OnCloseADS;
+        YandexGame.ErrorFullAdEvent += OnErrorADS;
+    }
+
+
+    private void OnDisable()
+    {
+        YandexGame.OpenFullAdEvent -= OnOpenADS;
+        YandexGame.CloseFullAdEvent -= OnCloseADS;
+        YandexGame.ErrorFullAdEvent -= OnErrorADS;
     }
 
     public void NextLevelButtonClick()
     {
-#if UNITY_EDITOR == false
-if(CanShowADS && IsRunAds() == false)
-{
-            ShowADS();
-            return;
-}
-#endif
+        _timeToADS = YandexGame.Instance.infoYG.fullscreenAdInterval - (int)YandexGame.timerShowAd;
 
+        if (_timeToADS > 0)
+        {
+            _animatorScreenWin.SetTrigger("Fade");
+            _animator.SetBool("Open", false);
+            StartCoroutine(FadeComplete(GetCurrentScene()));
+        }
+        else
+        {
+#if UNITY_EDITOR == false
+            ShowADS();
+#endif
+        }
+    }
+
+    private void OnErrorADS()
+    {
         _animatorScreenWin.SetTrigger("Fade");
         _animator.SetBool("Open", false);
         StartCoroutine(FadeComplete(GetCurrentScene()));
-
-        //if (_canShowADS == true)
-        //{
-        //}
-        //else
-        //{
-        //    _animatorScreenWin.SetTrigger("Fade");
-        //    _animator.SetBool("Open", false);
-        //    StartCoroutine(FadeComplete(GetCurrentScene()));
-        //}
-
-        //_canShowADS = false;
-    }
-
-    private bool CanShowADS => (Time.unscaledTime - _nowTime) > 0;
-
-    private bool IsRunAds()
-    {
-        int[] numberScene = new int[] { 1, 3, 7, 11, 15, 19, 23, 27, 31, 34, 37, 41, 45, 48, 51, 55, 60 };
-        bool isState = false;
-
-        for (int i = 0; i < numberScene.Length - 1; i++)
-            if (SceneManager.GetActiveScene().buildIndex == numberScene[i])
-                isState = true;
-
-        return isState;
     }
 
     private void ShowADS()
     {
-        //if (IsRunAds() == false && CanShowADS)
-            InterstitialAd.Show(
-                onOpenCallback: OnOpenADS,
-                onCloseCallback: OnCloseADS);
+        YandexGame.FullscreenShow();
     }
 
-    private void OnCloseADS(bool obj)
+    private void OnCloseADS()
     {
         IsADS = false;
-        _nowTime = Time.unscaledTime + _adCooldown;
     }
 
     private void OnOpenADS()

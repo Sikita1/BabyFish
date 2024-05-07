@@ -9,8 +9,8 @@ public class ChangedScore : MonoBehaviour
     [SerializeField] private Sprite[] _sprites;
     [SerializeField] private Image _image;
     [SerializeField] private Score _score;
-    [SerializeField] private float _lerpDuraction;
     [SerializeField] private AudioSource _audio;
+    [SerializeField] private float _lerpDuraction;
 
     [SerializeField] private AwardAnimator _award;
 

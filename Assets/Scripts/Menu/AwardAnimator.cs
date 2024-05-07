@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using Agava.YandexGames;
+using YG;
 
 public class AwardAnimator : MonoBehaviour
 {
@@ -15,18 +13,19 @@ public class AwardAnimator : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(SDKInicialition());
         _panel.SetActive(false);
     }
 
-    private IEnumerator SDKInicialition()
+    private void OnEnable()
     {
-#if !UNITY_EDITOR && UNITY_WEBGL 
+        YandexGame.OpenFullAdEvent += OpenCallback;
+        YandexGame.CloseFullAdEvent += CloseCallback;
+    }
 
-        yield return YandexGamesSdk.Initialize();
-
-#endif
-        yield break;
+    private void OnDisable()
+    {
+        YandexGame.OpenFullAdEvent -= OpenCallback;
+        YandexGame.CloseFullAdEvent -= CloseCallback;
     }
 
     private void OnPanelOn()
@@ -44,9 +43,7 @@ public class AwardAnimator : MonoBehaviour
     {
         _panel.SetActive(false);
 
-        InterstitialAd.Show(
-                onOpenCallback: OpenCallback,
-                onCloseCallback: CloseCallback);
+        YandexGame.FullscreenShow();
     }
 
     private void OpenCallback()
@@ -54,7 +51,7 @@ public class AwardAnimator : MonoBehaviour
         IsADS = true;
     }
 
-    private void CloseCallback(bool status)
+    private void CloseCallback()
     {
         IsADS = false;
     }

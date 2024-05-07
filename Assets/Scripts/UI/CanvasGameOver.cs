@@ -1,8 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Agava.YandexGames;
-using System.Collections;
-using System;
 
 [RequireComponent(typeof(AudioSource))]
 public class CanvasGameOver : MonoBehaviour
@@ -23,13 +19,10 @@ public class CanvasGameOver : MonoBehaviour
 
     [SerializeField] private GameWinPanel _winPanel;
 
-    //private YandexSDK _yandexSDK;
-
     private bool _isFocus;
 
     private void Awake()
     {
-        //_yandexSDK = YandexSDK.Instance;
         _audio = GetComponent<AudioSource>();
     }
 
